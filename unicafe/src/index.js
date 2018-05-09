@@ -4,15 +4,11 @@ import ReactDOM from 'react-dom'
 
 const App = (props) => {
     const {hyvaPainalluksia} = props
-    const lisaaHyvia = () => {
-        hyvaPainalluksia.value++
-        renderoi()
-    }
-    return (
-        
+    
+    return (       
         <div>
             <h1>anna palautetta</h1>
-            <button type = "button" onClick={lisaaHyvia()}>hyvä</button>
+            <button type = "button" /*onClick={lisaaHyvia()}*/>hyvä</button>
             <button type = "button">neutraali</button>
             <button type = "button">huono</button>
             <h1>statistiikka</h1>
@@ -27,6 +23,10 @@ const hyvaPainalluksia = {
     value: 0
 }
 
+const lisaaHyvia = () => {
+    hyvaPainalluksia.value++
+    renderoi()
+}
 
 
 const renderoi = () => {
@@ -37,3 +37,5 @@ const renderoi = () => {
 }
 
 renderoi()
+lisaaHyvia()
+lisaaHyvia()
