@@ -1,19 +1,39 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-class App extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
 
-        }
+const App = (props) => {
+    const {hyvaPainalluksia} = props
+    const lisaaHyvia = () => {
+        hyvaPainalluksia.value++
+        renderoi()
     }
-
-    render() {
-        return (
-            <div>Hello world!!!</div>
-        )
-    }
+    return (
+        
+        <div>
+            <h1>anna palautetta</h1>
+            <button type = "button" onClick={lisaaHyvia()}>hyvä</button>
+            <button type = "button">neutraali</button>
+            <button type = "button">huono</button>
+            <h1>statistiikka</h1>
+            <p>hyvä {hyvaPainalluksia.value}</p>
+            <p>neutraali</p>
+            <p>huono</p>
+        </div>
+    )
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))
+const hyvaPainalluksia = {
+    value: 0
+}
+
+
+
+const renderoi = () => {
+    ReactDOM.render(
+        <App hyvaPainalluksia={hyvaPainalluksia} />,
+        document.getElementById('root')
+    )
+}
+
+renderoi()
