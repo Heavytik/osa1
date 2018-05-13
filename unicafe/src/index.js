@@ -21,8 +21,10 @@ const Statics = (props) => {
         return Math.round(number * factor) / factor
     }  
     
-    const keskiarvo = precisionRound((hyva - huono) / Math.max(painalluksiaYhteensa, 1), 2)
-    const hyviaProsentteina = precisionRound((hyva / painalluksiaYhteensa) * 100, 2) + '%'
+    const keskiarvo = precisionRound((hyva - huono) /
+        Math.max(painalluksiaYhteensa, 1), 2)
+    const hyviaProsentteina = precisionRound((hyva /
+        painalluksiaYhteensa) * 100, 2) + '%'
     
     if (painalluksiaYhteensa === 0) {
         return (
@@ -41,7 +43,8 @@ const Statics = (props) => {
                         <Static text={'neutraali'} value={neutraali} />
                         <Static text={'huono'} value={huono} />
                         <Static text={'keskiarvo'} value={keskiarvo} />
-                        <Static text={'positiivisia'} value={hyviaProsentteina} />
+                        <Static text={'positiivisia'} 
+                            value={hyviaProsentteina} />
                     </tbody>
                 </table>    
             </div>
@@ -51,8 +54,8 @@ const Statics = (props) => {
         
 
 class App extends React.Component {
-    constructor(props) {
-        super(props)
+    constructor() {
+        super()
         this.state = {
             hyva: 0,
             neutraali: 0,
@@ -60,39 +63,19 @@ class App extends React.Component {
         }
     }
 
-    lisaaHyva () {
-        return (
-            () => this.setState({ hyva: this.state.hyva + 1 })
-        )
-    }
-
-    lisaaNeutraali () {
-        return (
-            () => this.setState({ neutraali: this.state.neutraali + 1 })
-        )
-    }
-
-    lisaaHuono () {
-        return ( 
-            () => this.setState({ huono: this.state.huono + 1 })
-        )
-    }
-
-    /*lisaa (original) {
-        console.log('lisaa call successed', modify, original)
-        return (
-            () => this.setState({ : original + 1 })
-        )
-    }*/
-
+    lisaa = (muutettava) => () =>
+        this.setState({[muutettava]: this.state[muutettava] + 1 })
+             
+    
+    
     render() {
-        const {hyva, neutraali, huono} = this.state
         return (       
             <div>
                 <h1>anna palautetta</h1>
-                <Button handleClick={this.lisaaHyva(/*this.state, 'hyva', this.state.hyva)*/)} text={'Hyvä'} />
-                <Button handleClick={this.lisaaNeutraali()} text={'Neutraali'} />
-                <Button handleClick={this.lisaaHuono()} text={'Huono'} />
+                <Button handleClick={this.lisaa('hyva')} text={'Hyvä'} />
+                <Button handleClick={this.lisaa('neutraali')}
+                    text={'Neutraali'} />
+                <Button handleClick={this.lisaa('huono')} text={'Huono'} />
                 <Statics currentState={this.state}/>
             </div>
         )
